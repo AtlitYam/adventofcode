@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class DayOneCalculation {
+public class DayOneImplementation {
     FileLoader fileLoader = new FileLoader();
     ListMapper listMapper = new ListMapper();
 
@@ -14,9 +14,9 @@ public class DayOneCalculation {
         return getListOfTotals(filePath).stream().max(Comparator.naturalOrder()).orElse(-1);
     }
 
-   public Integer getTotalTopThreeCalories(String filePath) {
+    public Integer getTotalTopThreeCalories(String filePath) {
         return calculateTotal(getListOfTotals(filePath).stream().sorted(Comparator.reverseOrder()).limit(3).toList());
-   }
+    }
 
     private List<Integer> getListOfTotals(String filePath) {
         List<String> fileArray = fileLoader.loadFileAsList(filePath);
