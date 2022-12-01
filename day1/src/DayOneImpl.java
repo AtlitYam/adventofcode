@@ -4,7 +4,6 @@ import listutils.ListMapper;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DayOneImpl {
     FileLoader fileLoader = new FileLoader();
@@ -27,10 +26,6 @@ public class DayOneImpl {
     }
 
     private Integer calculateTotal(List<Integer> input) {
-        AtomicInteger total = new AtomicInteger();
-
-        input.forEach(i -> total.set(total.get() + i));
-
-        return total.get();
+        return input.stream().mapToInt(Integer::intValue).sum();
     }
 }
