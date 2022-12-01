@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class DayOneImplementation {
+public class DayOneImpl {
     FileLoader fileLoader = new FileLoader();
     ListMapper listMapper = new ListMapper();
 
