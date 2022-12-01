@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListMapper {
-    public List<List<Integer>> mapList(List<String> input) {
+    public static List<List<Integer>> mapList(List<String> input) {
         List<List<Integer>> output = new ArrayList<>();
         List<Integer> currentList = new ArrayList<>();
 
@@ -25,7 +25,7 @@ public class ListMapper {
         return output;
     }
 
-    private boolean isLastRowInInput(String row, List<String> input) {
+    private static boolean isLastRowInInput(String row, List<String> input) {
         return input.indexOf(row) == input.size() - 1;
     }
 }

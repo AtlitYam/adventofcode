@@ -22,7 +22,7 @@ public class FileLoader {
         return output.toString();
     }
 
-    public List<String> loadFileAsList(String filePath) {
+    public static List<String> loadFileAsList(String filePath) {
         List<String> output = new ArrayList<>();
         try {
             File file = new File(filePath);
