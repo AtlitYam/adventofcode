@@ -4,7 +4,9 @@ import enums.RockPaperScissors;
 import java.util.ArrayList;
 import java.util.List;
 
-import static enums.Result.*;
+import static enums.Result.DRAW;
+import static enums.Result.LOSS;
+import static enums.Result.WIN;
 import static enums.RockPaperScissors.getShapeThatProducesExpectedResult;
 import static enums.RockPaperScissors.getShapeWinsAgainst;
 import static fileutils.FileLoader.loadFileAsList;
