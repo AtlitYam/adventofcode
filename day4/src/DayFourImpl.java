@@ -51,6 +51,6 @@ public class DayFourImpl {
     private boolean isAnyNumberOverlapping(List<NumberPairs> numberPairs) {
         List<Integer> numbersInFirstPair = getFirstNumberPair(numberPairs).getAllNumbersInRangeOfNumberPair();
         List<Integer> numbersInSecondPair = getSecondNumberPair(numberPairs).getAllNumbersInRangeOfNumberPair();
-        return numbersInFirstPair.stream().anyMatch(numbersInSecondPair::contains);
+        return numbersInFirstPair.stream().anyMatch(new HashSet<>(numbersInSecondPair)::contains);
     }
 }
