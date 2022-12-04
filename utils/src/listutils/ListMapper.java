@@ -1,5 +1,7 @@
 package listutils;
 
+import utils.NumberPairs;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,14 @@ public class ListMapper {
             currentList.add(Integer.valueOf(row));
         }
         return output;
+    }
+
+    public List<List<NumberPairs>> mapListToNumberPairs(List<List<String>> listOfListOfStrings) {
+        return listOfListOfStrings.stream().map(listOfStrings -> listOfStrings.stream().map(this::mapStringToNumberPairs).toList()).toList();
+    }
+
+    private NumberPairs mapStringToNumberPairs(String numberPairAsList) {
+        return new NumberPairs(numberPairAsList);
     }
 
     private static boolean isLastRowInInput(String row, List<String> input) {

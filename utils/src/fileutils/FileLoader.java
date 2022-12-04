@@ -37,4 +37,20 @@ public class FileLoader {
         }
         return output;
     }
+
+    public static List<List<String>> loadFileAsListOfLists(String filePath) {
+        List<List<String>> output = new ArrayList<>();
+        try {
+            File file = new File(filePath);
+            Scanner fileReader = new Scanner(file);
+            while (fileReader.hasNextLine()) {
+                output.add(List.of(fileReader.nextLine().split(",")));
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return output;
+    }
 }
