@@ -11,7 +11,7 @@ import static fileutils.FileLoader.loadMovesFromFile;
 public class DayFive {
     public static void main(String[] args) {
         Instant startTime = Instant.now();
-        String filePath = "resources/DayFiveChallenge.txt";
+        String filePath = "resources/DayFiveRandomTemplate.txt";
 
         List<Moves> movesList1 = loadMovesFromFile(filePath);
         List<Boxes> boxes1 = loadBoxesFromFile(filePath);
