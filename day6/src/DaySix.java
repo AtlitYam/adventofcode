@@ -11,7 +11,8 @@ public class DaySix {
         Instant startTime = Instant.now();
         String filePath = "resources/DaySixExample.txt";
         Instant startTimeGeneratingString = Instant.now();
-        String randomString = IntStream.range(0, RandomGenerator.getDefault().nextInt(0, 2147000000)).mapToObj(i -> String.valueOf((char) RandomGenerator.getDefault().nextInt(33, 126))).collect(Collectors.joining());
+        int stringLength = 1000000;
+        String randomString = IntStream.range(0, RandomGenerator.getDefault().nextInt(0, stringLength)).mapToObj(i -> String.valueOf((char) RandomGenerator.getDefault().nextInt(33, 126))).collect(Collectors.joining());
         System.out.printf("(Generating random completed in %sms)%n", Duration.between(startTimeGeneratingString, Instant.now()).toMillis());
         Instant startTimeChallenge = Instant.now();
         System.out.printf("Starting the Challenges%n");
@@ -29,7 +30,7 @@ public class DaySix {
         System.out.printf("The amount of characters before a block of four non-repeating characters appeared in random string is: %s%n", DaySixImpl.countCharactersUntilNonRepeatingForRange(randomString, 4));
         System.out.printf("The amount of characters before a block of four non-repeating characters appeared in random string is: %s%n", DaySixImpl.countCharactersUntilNonRepeatingForRange(randomString, 14));
         int expectedRange = 69;
-        System.out.printf("The amount of characters before a block of %s non-repeating characters appeared in random string is: %s%n", expectedRange, DaySixImpl.countCharactersUntilNonRepeatingForRange(randomString, expectedRange));
+        System.out.printf("The amount of characters before a block of %s non-repeating characters appeared in random string of %s characters is: %s%n", expectedRange, stringLength, DaySixImpl.countCharactersUntilNonRepeatingForRange(randomString, expectedRange));
 
         System.out.printf("(Random completed in %sms)%n", Duration.between(startTimeRandom, Instant.now()).toMillis());
 
