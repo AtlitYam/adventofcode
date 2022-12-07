@@ -2,6 +2,7 @@ package fileutils;
 
 import Utils.Boxes;
 import Utils.Moves;
+import utils.CommandExecutor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -79,7 +80,7 @@ public class FileLoader {
         }
         for (String line : lines) {
             if (line.contains("1")) {
-                break;
+                continue;
             }
             boxLines.add(List.of(line.split("")));
         }
@@ -115,5 +116,11 @@ public class FileLoader {
             }
         }
         return output;
+    }
+
+    public static List<Object> loadFolderStructureFromFile(String filePath) {
+        List<String> file = loadFileAsList(filePath);
+        CommandExecutor commandExecutor = new CommandExecutor();
+        return commandExecutor.executeCommandsInFile(file);
     }
 }

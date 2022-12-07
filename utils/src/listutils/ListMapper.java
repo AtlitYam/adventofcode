@@ -1,5 +1,6 @@
 package listutils;
 
+import org.json.JSONArray;
 import utils.NumberPairs;
 
 import java.util.ArrayList;
@@ -37,5 +38,9 @@ public class ListMapper {
 
     private static boolean isLastRowInInput(String row, List<String> input) {
         return input.indexOf(row) == input.size() - 1;
+    }
+
+    public static JSONArray listStringToObjectArray(String input) {
+        return new JSONArray(input);
     }
 }
