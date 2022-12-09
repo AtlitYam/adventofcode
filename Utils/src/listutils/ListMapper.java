@@ -1,7 +1,7 @@
 package listutils;
 
+import Utils.NumberPairs;
 import org.json.JSONArray;
-import utils.NumberPairs;
 
 import java.util.ArrayList;
 import java.util.List;

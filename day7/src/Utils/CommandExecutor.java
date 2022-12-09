@@ -1,10 +1,12 @@
-package utils;
+package Utils;
+
+import Enums.Commands;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
-import static utils.Commands.CD_DIR;
+import static Enums.Commands.CD_DIR;
 
 public class CommandExecutor {
     List<String> currentPath = new ArrayList<>();

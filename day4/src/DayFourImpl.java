@@ -1,5 +1,5 @@
+import Utils.NumberPairs;
 import listutils.ListMapper;
-import utils.NumberPairs;
 
 import java.util.HashSet;
 import java.util.List;

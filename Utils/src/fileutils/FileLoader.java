@@ -1,8 +1,9 @@
 package fileutils;
 
 import Utils.Boxes;
+import Utils.CommandExecutor;
 import Utils.Moves;
-import utils.CommandExecutor;
+import Utils.Trees;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -122,5 +123,23 @@ public class FileLoader {
         List<String> file = loadFileAsList(filePath);
         CommandExecutor commandExecutor = new CommandExecutor();
         return commandExecutor.executeCommandsInFile(file);
+    }
+
+    public static List<Trees> loadFileAsListOfTrees(String uwu) {
+        List<String> lines = loadFileAsList(uwu);
+        List<List<String>> treeLines = new ArrayList<>();
+
+        for (String line : lines) {
+            treeLines.add(List.of(line.split("")));
+        }
+
+        return treeLines.stream().map(line -> {
+            List<Trees> list = new ArrayList<>();
+            for (int i = 0; i < line.size(); i++) {
+                Trees trees = new Trees(Integer.valueOf(line.get(i)), i + 1, treeLines.indexOf(line) + 1, false);
+                list.add(trees);
+            }
+            return list.stream().toList();
+        }).flatMap(List::stream).toList();
     }
 }
