@@ -162,7 +162,7 @@ public class FileLoader {
                 inventoryInts.add(parseLong);
             }
 
-            listMonkeys.add(new Monkey(monkeyName, inventoryInts, operation, Integer.parseInt(test), testTrue, testFalse, 0));
+            listMonkeys.add(new Monkey(monkeyName, operation, Integer.parseInt(test), testTrue, testFalse, inventoryInts, 0));
         }
         return listMonkeys;
     }
