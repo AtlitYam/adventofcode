@@ -2,6 +2,7 @@ package fileutils;
 
 import Utils.Boxes;
 import Utils.CommandExecutor;
+import Utils.Monkey;
 import Utils.Moves;
 import Utils.Trees;
 
@@ -141,5 +142,28 @@ public class FileLoader {
             }
             return list.stream().toList();
         }).flatMap(List::stream).toList();
+    }
+
+    public static List<Monkey> loadFileAsListOfMonkeys(String filePath) {
+        List<String> lines = loadFileAsList(filePath);
+        List<Monkey> listMonkeys = new ArrayList<>();
+
+        for (int i = 0; i < lines.size(); i += 7) {
+            String monkeyName = lines.get(i).replace(":", "");
+            String inventory = lines.get(i + 1).replace("  Starting items: ", "");
+            String operation = lines.get(i + 2).replace("  Operation: new = old ", "");
+            String test = lines.get(i + 3).replace("  Test: divisible by ", "");
+            String testTrue = lines.get(i + 4).replace("    If true: throw to ", "");
+            String testFalse = lines.get(i + 5).replace("    If false: throw to ", "");
+
+            List<Long> inventoryInts = new ArrayList<>();
+            for (String s : inventory.split(", ")) {
+                Long parseLong = Long.parseLong(s);
+                inventoryInts.add(parseLong);
+            }
+
+            listMonkeys.add(new Monkey(monkeyName, inventoryInts, operation, Integer.parseInt(test), testTrue, testFalse, 0));
+        }
+        return listMonkeys;
     }
 }
