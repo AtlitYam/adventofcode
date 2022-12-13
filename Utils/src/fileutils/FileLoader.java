@@ -156,13 +156,13 @@ public class FileLoader {
             String testTrue = lines.get(i + 4).replace("    If true: throw to ", "");
             String testFalse = lines.get(i + 5).replace("    If false: throw to ", "");
 
-            List<Long> inventoryInts = new ArrayList<>();
+            List<Long> inventoryLongs = new ArrayList<>();
             for (String s : inventory.split(", ")) {
                 Long parseLong = Long.parseLong(s);
-                inventoryInts.add(parseLong);
+                inventoryLongs.add(parseLong);
             }
 
-            listMonkeys.add(new Monkey(monkeyName, operation, Integer.parseInt(test), testTrue, testFalse, inventoryInts, 0));
+            listMonkeys.add(new Monkey(monkeyName, operation, Integer.parseInt(test), testTrue, testFalse, inventoryLongs, 0));
         }
         return listMonkeys;
     }

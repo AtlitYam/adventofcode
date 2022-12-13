@@ -5,6 +5,7 @@ import java.util.List;
 public class DayElevenImpl {
 
     public static Long getActivityForTwoMostActive(List<Monkey> listMonkey, Integer rounds, boolean doBoredom) {
+        int modulus = listMonkey.stream().mapToInt(Monkey::getTest).reduce(1, Math::multiplyExact);
         for (int i = 1; i <= rounds; i++) {
             for (Monkey monkey : listMonkey) {
                 List<Long> inventoryBefore = monkey.getInventory();
@@ -14,10 +15,11 @@ public class DayElevenImpl {
                     if (doBoredom) {
                         worryLevel = doMonkeyBoredom(worryLevel);
                     }
+                    Long smallNumberWorry = worryLevel % modulus;
                     if (doTest(worryLevel, monkey)) {
-                        addItemToReceivingMonkey(worryLevel, Monkey.getMonkeyByName(monkey.getTestTrue(), listMonkey));
+                        addItemToReceivingMonkey(smallNumberWorry, Monkey.getMonkeyByName(monkey.getTestTrue(), listMonkey));
                     } else {
-                        addItemToReceivingMonkey(worryLevel, Monkey.getMonkeyByName(monkey.getTestFalse(), listMonkey));
+                        addItemToReceivingMonkey(smallNumberWorry, Monkey.getMonkeyByName(monkey.getTestFalse(), listMonkey));
                     }
                 }
                 monkey.getInventory().removeAll(inventoryBefore);
@@ -31,18 +33,18 @@ public class DayElevenImpl {
         String[] splitOperation = monkey.getOperation().split(" ");
         if (splitOperation[1].equals("old")) splitOperation[1] = String.valueOf(worryLevel);
         return switch (splitOperation[0]) {
-            case "*" -> worryLevel * Long.parseLong(splitOperation[1]);
-            case "+" -> worryLevel + Long.parseLong(splitOperation[1]);
+            case "*" -> Math.multiplyExact(worryLevel, Long.parseLong(splitOperation[1]));
+            case "+" -> Math.addExact(worryLevel, Long.parseLong(splitOperation[1]));
             default -> worryLevel;
         };
     }
 
     private static boolean doTest(Long worryLevel, Monkey monkey) {
-        return worryLevel % monkey.getTest() == 0;
+        return 0 == worryLevel % monkey.getTest();
     }
 
     private static Long doMonkeyBoredom(Long worryLevel) {
-        return worryLevel / 3;
+        return worryLevel / 1;
     }
 
     private static void addItemToReceivingMonkey(Long worryLevel, Monkey receivingMonkey) {
