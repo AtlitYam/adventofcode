@@ -4,17 +4,15 @@ import java.util.List;
 
 public class DayElevenImpl {
 
-    public static Long getActivityForTwoMostActive(List<Monkey> listMonkey, Integer rounds, boolean doBoredom) {
-        int modulus = listMonkey.stream().mapToInt(Monkey::getTest).reduce(1, Math::multiplyExact);
+    public static Long getActivityForTwoMostActive(List<Monkey> listMonkey, Integer rounds, Long boredomDivisor) {
+        Long modulus = listMonkey.stream().mapToLong(Monkey::getTest).reduce(1L, Math::multiplyExact);
         for (int i = 1; i <= rounds; i++) {
             for (Monkey monkey : listMonkey) {
                 List<Long> inventoryBefore = monkey.getInventory();
                 for (Long item : monkey.getInventory()) {
                     Long worryLevel = doInspection(item, monkey);
-                    monkey.setInspections(monkey.getInspections() + 1);
-                    if (doBoredom) {
-                        worryLevel = doMonkeyBoredom(worryLevel);
-                    }
+                    monkey.setInspections(monkey.getInspections() + 1L);
+                    worryLevel = worryLevel / boredomDivisor;
                     Long smallNumberWorry = worryLevel % modulus;
                     if (doTest(worryLevel, monkey)) {
                         addItemToReceivingMonkey(smallNumberWorry, Monkey.getMonkeyByName(monkey.getTestTrue(), listMonkey));
@@ -25,8 +23,8 @@ public class DayElevenImpl {
                 monkey.getInventory().removeAll(inventoryBefore);
             }
         }
-        int[] totalInspections = listMonkey.stream().map(Monkey::getInspections).mapToInt(Integer::intValue).sorted().toArray();
-        return ((long) totalInspections[totalInspections.length - 2] * totalInspections[totalInspections.length - 1]);
+        long[] totalInspections = listMonkey.stream().mapToLong(Monkey::getInspections).sorted().toArray();
+        return totalInspections[totalInspections.length - 2] * totalInspections[totalInspections.length - 1];
     }
 
     private static Long doInspection(Long worryLevel, Monkey monkey) {
@@ -41,10 +39,6 @@ public class DayElevenImpl {
 
     private static boolean doTest(Long worryLevel, Monkey monkey) {
         return 0 == worryLevel % monkey.getTest();
-    }
-
-    private static Long doMonkeyBoredom(Long worryLevel) {
-        return worryLevel / 1;
     }
 
     private static void addItemToReceivingMonkey(Long worryLevel, Monkey receivingMonkey) {
